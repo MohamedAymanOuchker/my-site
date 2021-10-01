@@ -4,12 +4,64 @@
 <head>
   <meta charset="utf-8">
   <title>Mohamed Ayman Ouchker</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <link href="https://fonts.googleapis.com/css?family=Merriweather|Montserrat|Sacramento" rel="stylesheet">
   <link rel="icon" href="favicon.ico">
+
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Bootstrap Scripts -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Merriweather|Montserrat|Sacramento" rel="stylesheet">
+
+  <!-- JS Script -->
+  <script src="js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
 
 <body>
+
+  <!-- Nav Bar -->
+
+  <nav class="navbar navbar-expand-lg navbar-dark">
+
+    <a class="navbar-brand" href="">tindog</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#footer">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#pricing">Pricing</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#cta">Download</a>
+        </li>
+      </ul>
+
+    </div>
+  </nav>
+
+  <!-- Loader -->
+
+  <div id="loader-wrapper">
+
+    <div id="loader"></div>
+
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+
+  </div>
+
   <div class="top-container">
     <img class="top-cloud" src="images/cloud.png" alt="cloud">
     <div class="title-text">
@@ -42,13 +94,13 @@
 
         <h3>Some of my skills</h3>
         <ul>
-            <li><b>Programming:</b> Python, Java, C/C++.</li>
-            <li><b>Web programming:</b> HTML, JavaScript, CSS, PHP, jQuery, BootStrap.</li>
-            <li><b>Databases:</b> MySQL.</li>
-            <li><b>Web Services:</b> REST.</li>
-            <li><b>Testing:</b> Unit Tests. </li>
-            <li><b>Tools:</b> Git, GitHub, Trello, Apache, Postman.</li>
-            <li><b>Environments:</b> Visual Studio Code, IntelliJ, PyCharm, Atom.</li>
+          <li><b>Programming:</b> Python, Java, C/C++.</li>
+          <li><b>Web programming:</b> HTML, JavaScript, CSS, PHP, jQuery, BootStrap.</li>
+          <li><b>Databases:</b> MySQL.</li>
+          <li><b>Web Services:</b> REST.</li>
+          <li><b>Testing:</b> Unit Tests. </li>
+          <li><b>Tools:</b> Git, GitHub, Trello, Apache, Postman.</li>
+          <li><b>Environments:</b> Visual Studio Code, IntelliJ, PyCharm, Atom.</li>
         </ul>
 
       </div>
@@ -56,15 +108,15 @@
 
     <hr>
     <h2>Resume</h3>
-    <a class="btn" href="resume/Resume_Ayman_Ouchker.pdf">DOWNLOAD RESUME</a>
+      <a class="btn" href="resume/Resume_Ayman_Ouchker.pdf">DOWNLOAD RESUME</a>
 
-    <hr>
-    <div class="contact-me">
-      <h2>Get In Touch</h2>
-      <h3>If you love coding as much as I do.</h3>
-      <p class="contact-message">Love coding as much as I do? Let's talk and code together! Contact me here!</p>
-      <a class="btn" href="mailto:ayman.ouchker@outlook.com">CONTACT ME</a>
-    </div>
+      <hr>
+      <div class="contact-me">
+        <h2>Get In Touch</h2>
+        <h3>If you love coding as much as I do.</h3>
+        <p class="contact-message">Love coding as much as I do? Let's talk and code together! Contact me here!</p>
+        <a class="btn" href="mailto:ayman.ouchker@outlook.com">CONTACT ME</a>
+      </div>
   </div>
 
 
@@ -74,6 +126,13 @@
     <a class="footer-link" href="https://www.instagram.com/ayman_ouchker/">Instagram</a>
     <p class="copyright">© 2021 Mohamed Ayman Ouchker.</p>
   </div>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>
+    window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')
+  </script>
+  <script src="js/main.js"></script>
+
 </body>
 
 </html>
