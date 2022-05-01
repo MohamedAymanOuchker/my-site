@@ -2,7 +2,8 @@
 .card {
     font-family: 'Poppins', sans-serif;
     position: relative;
-    left: 38%;
+    left: 50%;
+    transform: translateX(-50%);
     width: 350px;
     height: 190px;
     background: #fff;
