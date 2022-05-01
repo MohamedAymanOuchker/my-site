@@ -13,6 +13,8 @@
   <!-- CSS Stylesheets -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/card.css">
+  <link rel="stylesheet" href="css/skills.css">
 
   <!-- Bootstrap Scripts -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -81,8 +83,28 @@
   </div>
 
   <div class="middle-container">
+
+    <div class="card">
+      <div class="imgBx">
+          <img src="images/profilepic.png" alt="">
+      </div>
+      <div class="content">
+          <div class="details">
+              <h2>Ayman Ouchker<br><span>Web Developer & Designer</span></h2>
+              <div class="data">
+                  <h3>4<br><span>Posts</span></h3>
+                  <h3>120<br><span>Followers</span></h3>
+                  <h3>265<br><span>Following</span></h3>
+              </div>
+              <div class="actionBtn">
+                  <button onclick="location.href = 'https://www.instagram.com/ayman_ouchker/';">Follow</button>
+                  <button onclick="location.href = 'https://twitter.com/OuchkerAyman';">Message</button>
+              </div>
+          </div>
+      </div>
+    </div>    
+    <hr>
     <div id="about" class="profile">
-      <img class="pic" src="images/profilepic.png" alt="ayman-profile-img">
       <h2>Hello.</h2>
       <p class="intro">I'm an engineering student in Artificial Intelligence at the Euromed University of Fes. I'm passionate about software development and AI.</p>
     </div>
@@ -101,14 +123,28 @@
         <img class="programming-img" src="images/programming.png" alt="programming-img">
 
         <h3>Some of my skills</h3>
-        <ul>
-          <li><b>Programming:</b> Python, Java, C/C++.</li>
-          <li><b>Web programming:</b> HTML, JavaScript, CSS, PHP, jQuery, BootStrap.</li>
-          <li><b>Databases:</b> MySQL.</li>
-          <li><b>Web Services:</b> REST.</li>
-          <li><b>Testing:</b> Unit Tests. </li>
-          <li><b>Tools:</b> Git, GitHub, Trello, Apache, Postman.</li>
-          <li><b>Environments:</b> Visual Studio Code, IntelliJ, PyCharm, Atom.</li>
+        <ul class="skills-list">
+          <li class="list-el" style="--clr:#ffdd1c">
+              <b data-text="&nbsp;&nbsp;Programming:">&nbsp;&nbsp;Programming:&nbsp;</b> Python, Java, C/C++, C#.
+          </li>
+          <li class="list-el" style="--clr:#7fff00">
+              <b data-text="&nbsp;&nbsp;Databases:">&nbsp;&nbsp;Databases:&nbsp;</b> MySQL, SQlite, MongoDB.
+          </li>
+          <li class="list-el" style="--clr:#00dc82">
+              <b data-text="&nbsp;&nbsp;WebServices:">&nbsp;&nbsp;WebServices:&nbsp;</b> REST Api.
+          </li>
+          <li class="list-el" style="--clr:#dc00d4">
+              <b data-text="&nbsp;&nbsp;Testing:">&nbsp;&nbsp;Testing:&nbsp;</b> Unit Tests. 
+          </li>
+          <li class="list-el" style="--clr:#ff6493">
+              <b data-text="&nbsp;&nbsp;Tools:">&nbsp;&nbsp;Tools:&nbsp;</b> Git, GitHub, Trello, Apache, Postman.
+          </li>
+          <li class="list-el" style="--clr:#00ade1">
+              <b data-text="&nbsp;&nbsp;Environments:">&nbsp;&nbsp;Environments:&nbsp;</b> Visual Studio Code, IntelliJ, PyCharm, Atom...
+          </li>
+          <li class="list-el" style="--clr:#00ffff">
+            <b data-text="&nbsp;&nbsp;Webprogramming:">&nbsp;&nbsp;Webprogramming:&nbsp;</b>HTML, JavaScript, jQuery, CSS, PHP, &nbsp;&nbsp;&nbsp;&nbsp;BootStrap, TailWind...
+          </li>
         </ul>
 
       </div>
