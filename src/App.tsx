@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Scene } from './components/Scene';
 import { ProjectCard } from './components/ProjectCard';
 import { Github, Linkedin, Mail, Terminal, Database, Cpu, Brain, Notebook as Robot, Microwave as Microchip } from 'lucide-react';
+import { SquareArrowOutUpRight } from 'lucide-react';
 import emailjs from 'emailjs-com';
 
 function App() {
@@ -240,6 +241,7 @@ function App() {
               { icon: <Github className="w-8 h-8" />, href: 'https://github.com/MohamedAymanOuchker', label: 'GitHub' },
               { icon: <Linkedin className="w-8 h-8" />, href: 'https://www.linkedin.com/in/mohamed-ayman-ouchker/', label: 'LinkedIn' },
               { icon: <Mail className="w-8 h-8" />, href: 'mailto:ayman.ouchker@outlook.com', label: 'Email' },
+              { icon: <SquareArrowOutUpRight className="w-8 h-8" />, href: 'https://mohamedaymanouchker.github.io/my-site-old/', label: 'SquareArrowOutUpRight' },
             ].map((social, index) => (
               <motion.a
                 key={index}
