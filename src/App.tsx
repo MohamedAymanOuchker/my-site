@@ -40,12 +40,12 @@ function App() {
   };
 
   const skills = [
-    { icon: <Terminal className="w-8 h-8" />, name: 'Software Development', details: 'Python, C++, ROS' },
-    { icon: <Brain className="w-8 h-8" />, name: 'Machine Learning', details: 'TensorFlow, PyTorch' },
-    { icon: <Robot className="w-8 h-8" />, name: 'Robotics', details: 'ROS, Motion Planning' },
-    { icon: <Microchip className="w-8 h-8" />, name: 'Embedded Systems', details: 'Raspberry Pi, Arduino' },
-    { icon: <Database className="w-8 h-8" />, name: 'Computer Vision', details: 'OpenCV, YOLO' },
-    { icon: <Cpu className="w-8 h-8" />, name: 'Hardware Design', details: 'PCB, 3D Printing' },
+    { icon: <Terminal className="w-8 h-8" />, name: 'Programming Languages & Core Development', details: 'Python, C/C++, Java, MATLAB, Algorithm development and implementation' },
+    { icon: <Brain className="w-8 h-8" />, name: 'AI & ML/DL', details: 'Machine learning, Deep reinforcement learning, Neural network, Data manipulation and processing' },
+    { icon: <Robot className="w-8 h-8" />, name: 'Robotics', details: 'ROS, Path planning algorithms, Robot mechanical design and kinematics, System architecture and integration' },
+    { icon: <Microchip className="w-8 h-8" />, name: 'Embedded Systems', details: 'Embedded systems programming, Microcontroller programming, Sensor integration and calibration, PLC, Connected objects and IoT integration' },
+    { icon: <Database className="w-8 h-8" />, name: 'Computer Vision', details: 'OpenCV, YOLO, Computer vision and image processing, Image recognition and object detection, Image recognition and object detection' },
+    { icon: <Cpu className="w-8 h-8" />, name: 'Hardware Design', details: 'PCB design and electronic hardware integration, 3D modeling and CAD design, Conception and realization of robotic solutions' },
   ];
 
   const projects = [
