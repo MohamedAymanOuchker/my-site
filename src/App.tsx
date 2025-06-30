@@ -50,6 +50,12 @@ function App() {
 
   const projects = [
     {
+      title: 'Educational Robot',
+      description: 'Affordable educational robotics platform for teaching programming to children aged 7-12. Features ESP32-based hardware, Flutter mobile app with visual block programming, and autonomous navigation using enhanced E-Bug algorithm.',
+      image: 'https://www.dubai-sms.com/wp-content/uploads/2024/05/Is-Educational-Robotics-The-Future-of-Education3.jpg',
+      technologies: ['ESP32', 'Flutter', 'Arduino', 'Bluetooth LE', 'Computer Vision', 'PlatformIO'],
+    },
+    {
       title: 'AgriBot',
       description: 'Autonomous agricultural robot utilizing computer vision and deep learning for precise crop monitoring and harvesting. Implemented control system with custom path planning algorithms.',
       image: 'https://www.raspberrypi.com/app/uploads/2024/01/Screenshot-2024-01-25-at-13.45.16.png',
