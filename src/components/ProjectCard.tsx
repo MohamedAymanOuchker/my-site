@@ -1,40 +1,90 @@
 import { motion } from 'framer-motion';
+import { ArrowUpRight } from 'lucide-react';
 
-interface ProjectCardProps {
+export interface Project {
   title: string;
   description: string;
   image: string;
   technologies: string[];
 }
 
-export function ProjectCard({ title, description, image, technologies }: ProjectCardProps) {
+interface ProjectCardProps extends Project {
+  index: number;
+  featured?: boolean;
+}
+
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+export function ProjectCard({
+  title,
+  description,
+  image,
+  technologies,
+  index,
+  featured = false,
+}: ProjectCardProps) {
   return (
-    <motion.div
-      whileHover={{ y: -10 }}
-      className="group relative bg-gray-800 rounded-xl overflow-hidden border border-gray-700 hover:border-blue-500 transition-all"
+    <motion.article
+      initial={{ opacity: 0, y: 32 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-10% 0px' }}
+      transition={{ duration: 0.7, ease: EASE }}
+      className={`group relative flex flex-col overflow-hidden border border-line bg-surface transition-colors duration-300 hover:border-lime/40 ${
+        featured ? 'lg:col-span-2 lg:flex-row' : ''
+      }`}
     >
-      <div className="relative h-48 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent z-10" />
-        <img src={image} alt={title} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
+      <div
+        className={`relative overflow-hidden bg-obsidian ${
+          featured ? 'aspect-[16/10] lg:aspect-auto lg:w-1/2' : 'aspect-[16/10]'
+        }`}
+      >
+        {/* duotone tint unifies the mismatched source images */}
+        <div className="absolute inset-0 z-10 bg-gradient-to-t from-surface via-surface/10 to-transparent" />
+        <div className="absolute inset-0 z-10 bg-lime/5 mix-blend-overlay" />
+        <img
+          src={image}
+          alt={title}
+          loading="lazy"
+          decoding="async"
+          className="h-full w-full object-cover opacity-90 grayscale-[35%] transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
+        />
+        <span className="absolute left-4 top-4 z-20 font-mono text-[11px] tracking-mono text-lime">
+          {String(index + 1).padStart(2, '0')}
+        </span>
       </div>
-      <div className="p-6 relative">
-        <h3 className="text-xl font-bold mb-3 text-white group-hover:text-blue-400 transition-colors">
-          {title}
-        </h3>
-        <p className="text-gray-400 mb-4 text-sm leading-relaxed">
+
+      <div className={`flex flex-1 flex-col p-7 md:p-8 ${featured ? 'lg:justify-center' : ''}`}>
+        <div className="flex items-start justify-between gap-4">
+          <h3
+            className={`font-display font-semibold text-ink transition-colors group-hover:text-lime ${
+              featured ? 'text-2xl md:text-3xl' : 'text-xl'
+            }`}
+          >
+            {title}
+          </h3>
+          <ArrowUpRight
+            className="mt-1 h-5 w-5 shrink-0 text-muted transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-lime"
+            strokeWidth={1.5}
+          />
+        </div>
+        <p
+          className={`mt-3 leading-relaxed text-muted ${
+            featured ? 'max-w-md text-[15px]' : 'text-sm'
+          }`}
+        >
           {description}
         </p>
-        <div className="flex flex-wrap gap-2">
+        <div className="mt-6 flex flex-wrap gap-2">
           {technologies.map((tech) => (
             <span
               key={tech}
-              className="px-3 py-1 bg-blue-900/30 text-blue-300 rounded-full text-xs font-medium"
+              className="border border-line px-2.5 py-1 font-mono text-[10px] uppercase tracking-mono text-muted"
             >
               {tech}
             </span>
           ))}
         </div>
       </div>
-    </motion.div>
+    </motion.article>
   );
 }

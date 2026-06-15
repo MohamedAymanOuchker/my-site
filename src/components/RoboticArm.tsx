@@ -55,58 +55,58 @@ export function RoboticArm() {
       <group ref={baseRef}>
         <mesh position={[0, 0.25, 0]}>
           <cylinderGeometry args={[1.2, 1.5, 0.5, 32]} />
-          <meshStandardMaterial color="#1e40af" metalness={0.8} roughness={0.2} />
+          <meshStandardMaterial color="#2b2f2c" metalness={0.8} roughness={0.2} />
         </mesh>
         <mesh position={[0, 0.6, 0]}>
           <cylinderGeometry args={[0.8, 0.8, 0.2, 32]} />
-          <meshStandardMaterial color="#3b82f6" metalness={0.7} roughness={0.3} />
+          <meshStandardMaterial color="#3a3f3b" metalness={0.7} roughness={0.3} />
         </mesh>
 
         {/* Shoulder joint */}
         <group ref={shoulderRef} position={[0, 0.7, 0]}>
           <mesh>
             <boxGeometry args={[1, 0.8, 0.8]} />
-            <meshStandardMaterial color="#2563eb" metalness={0.6} roughness={0.3} />
+            <meshStandardMaterial color="#23262a" metalness={0.6} roughness={0.3} />
           </mesh>
 
           {/* Upper arm */}
           <group ref={upperArmRef} position={[0, 0, 0]}>
             <mesh position={[0, 1.2, 0]}>
               <boxGeometry args={[0.4, 2.4, 0.4]} />
-              <meshStandardMaterial color="#3b82f6" metalness={0.6} roughness={0.3} />
+              <meshStandardMaterial color="#3a3f3b" metalness={0.6} roughness={0.3} />
             </mesh>
             {/* Hydraulic detail */}
             <mesh position={[0.3, 1, 0.3]} rotation={[0, 0, Math.PI * 0.1]}>
               <cylinderGeometry args={[0.1, 0.1, 1.5, 8]} />
-              <meshStandardMaterial color="#60a5fa" metalness={0.9} roughness={0.1} />
+              <meshStandardMaterial color="#CDF564" metalness={0.9} roughness={0.1} />
             </mesh>
 
             {/* Elbow joint */}
             <group position={[0, 2.4, 0]}>
               <mesh>
                 <boxGeometry args={[0.6, 0.6, 0.6]} />
-                <meshStandardMaterial color="#2563eb" metalness={0.7} roughness={0.2} />
+                <meshStandardMaterial color="#23262a" metalness={0.7} roughness={0.2} />
               </mesh>
 
               {/* Forearm */}
               <group ref={forearmRef}>
                 <mesh position={[0, 1, 0]}>
                   <boxGeometry args={[0.35, 2, 0.35]} />
-                  <meshStandardMaterial color="#3b82f6" metalness={0.6} roughness={0.3} />
+                  <meshStandardMaterial color="#3a3f3b" metalness={0.6} roughness={0.3} />
                 </mesh>
 
                 {/* Wrist */}
                 <group ref={wristRef} position={[0, 2, 0]}>
                   <mesh>
                     <boxGeometry args={[0.5, 0.5, 0.5]} />
-                    <meshStandardMaterial color="#2563eb" metalness={0.7} roughness={0.2} />
+                    <meshStandardMaterial color="#23262a" metalness={0.7} roughness={0.2} />
                   </mesh>
 
                   {/* Claw base */}
                   <group ref={clawBaseRef} position={[0, 0.4, 0]}>
                     <mesh>
                       <boxGeometry args={[0.4, 0.3, 0.8]} />
-                      <meshStandardMaterial color="#3b82f6" metalness={0.8} roughness={0.2} />
+                      <meshStandardMaterial color="#3a3f3b" metalness={0.8} roughness={0.2} />
                     </mesh>
 
                     {/* Claw parts */}
@@ -114,20 +114,20 @@ export function RoboticArm() {
                       {/* Left claw */}
                       <mesh ref={clawLeftRef} position={[0.15, 0, 0]}>
                         <boxGeometry args={[0.1, 0.2, 0.6]} />
-                        <meshStandardMaterial color="#60a5fa" metalness={0.9} roughness={0.1} />
+                        <meshStandardMaterial color="#CDF564" metalness={0.9} roughness={0.1} />
                         <mesh position={[0, 0, 0.25]}>
                           <boxGeometry args={[0.05, 0.15, 0.2]} />
-                          <meshStandardMaterial color="#93c5fd" metalness={0.8} roughness={0.2} />
+                          <meshStandardMaterial color="#A6CB3F" metalness={0.8} roughness={0.2} />
                         </mesh>
                       </mesh>
 
                       {/* Right claw */}
                       <mesh ref={clawRightRef} position={[-0.15, 0, 0]}>
                         <boxGeometry args={[0.1, 0.2, 0.6]} />
-                        <meshStandardMaterial color="#60a5fa" metalness={0.9} roughness={0.1} />
+                        <meshStandardMaterial color="#CDF564" metalness={0.9} roughness={0.1} />
                         <mesh position={[0, 0, 0.25]}>
                           <boxGeometry args={[0.05, 0.15, 0.2]} />
-                          <meshStandardMaterial color="#93c5fd" metalness={0.8} roughness={0.2} />
+                          <meshStandardMaterial color="#A6CB3F" metalness={0.8} roughness={0.2} />
                         </mesh>
                       </mesh>
                     </group>

@@ -37,11 +37,11 @@ export function Robot() {
       {/* Body */}
       <mesh position={[0, 1.5, 0]}>
         <boxGeometry args={[1.2, 1.8, 0.8]} />
-        <meshStandardMaterial color="#3b82f6" metalness={0.8} roughness={0.2} />
+        <meshStandardMaterial color="#3a3f3b" metalness={0.8} roughness={0.2} />
         {/* Chest Details */}
         <mesh position={[0, 0.2, 0.41]}>
           <boxGeometry args={[0.8, 0.4, 0.01]} />
-          <meshStandardMaterial color="#60a5fa" metalness={0.9} roughness={0.1} />
+          <meshStandardMaterial color="#CDF564" metalness={0.9} roughness={0.1} />
         </mesh>
       </mesh>
 
@@ -49,16 +49,16 @@ export function Robot() {
       <group ref={headRef} position={[0, 2.8, 0]}>
         <mesh>
           <boxGeometry args={[0.8, 0.8, 0.8]} />
-          <meshStandardMaterial color="#60a5fa" metalness={0.7} roughness={0.3} />
+          <meshStandardMaterial color="#CDF564" metalness={0.7} roughness={0.3} />
         </mesh>
         {/* Eyes */}
         <mesh position={[0.2, 0, 0.41]}>
           <boxGeometry args={[0.1, 0.1, 0.01]} />
-          <meshStandardMaterial color="#93c5fd" emissive="#93c5fd" emissiveIntensity={2} />
+          <meshStandardMaterial color="#A6CB3F" emissive="#A6CB3F" emissiveIntensity={2} />
         </mesh>
         <mesh position={[-0.2, 0, 0.41]}>
           <boxGeometry args={[0.1, 0.1, 0.01]} />
-          <meshStandardMaterial color="#93c5fd" emissive="#93c5fd" emissiveIntensity={2} />
+          <meshStandardMaterial color="#A6CB3F" emissive="#A6CB3F" emissiveIntensity={2} />
         </mesh>
       </group>
 
@@ -66,12 +66,12 @@ export function Robot() {
       <group ref={leftArmRef} position={[0.8, 2, 0]}>
         <mesh position={[0, -0.6, 0]}>
           <boxGeometry args={[0.3, 1.5, 0.3]} />
-          <meshStandardMaterial color="#1d4ed8" metalness={0.8} roughness={0.2} />
+          <meshStandardMaterial color="#2b2f2c" metalness={0.8} roughness={0.2} />
         </mesh>
         {/* Left Hand */}
         <mesh position={[0, -1.4, 0]}>
           <boxGeometry args={[0.4, 0.3, 0.3]} />
-          <meshStandardMaterial color="#60a5fa" metalness={0.7} roughness={0.3} />
+          <meshStandardMaterial color="#CDF564" metalness={0.7} roughness={0.3} />
         </mesh>
       </group>
 
@@ -79,12 +79,12 @@ export function Robot() {
       <group ref={rightArmRef} position={[-0.8, 2, 0]}>
         <mesh position={[0, -0.6, 0]}>
           <boxGeometry args={[0.3, 1.5, 0.3]} />
-          <meshStandardMaterial color="#1d4ed8" metalness={0.8} roughness={0.2} />
+          <meshStandardMaterial color="#2b2f2c" metalness={0.8} roughness={0.2} />
         </mesh>
         {/* Right Hand */}
         <mesh position={[0, -1.4, 0]}>
           <boxGeometry args={[0.4, 0.3, 0.3]} />
-          <meshStandardMaterial color="#60a5fa" metalness={0.7} roughness={0.3} />
+          <meshStandardMaterial color="#CDF564" metalness={0.7} roughness={0.3} />
         </mesh>
       </group>
 
@@ -92,12 +92,12 @@ export function Robot() {
       <group ref={leftLegRef} position={[0.3, 0.5, 0]}>
         <mesh position={[0, -0.75, 0]}>
           <boxGeometry args={[0.3, 1.5, 0.3]} />
-          <meshStandardMaterial color="#1d4ed8" metalness={0.8} roughness={0.2} />
+          <meshStandardMaterial color="#2b2f2c" metalness={0.8} roughness={0.2} />
         </mesh>
         {/* Left Foot */}
         <mesh position={[0, -1.6, 0.1]}>
           <boxGeometry args={[0.4, 0.3, 0.5]} />
-          <meshStandardMaterial color="#60a5fa" metalness={0.7} roughness={0.3} />
+          <meshStandardMaterial color="#CDF564" metalness={0.7} roughness={0.3} />
         </mesh>
       </group>
 
@@ -105,12 +105,12 @@ export function Robot() {
       <group ref={rightLegRef} position={[-0.3, 0.5, 0]}>
         <mesh position={[0, -0.75, 0]}>
           <boxGeometry args={[0.3, 1.5, 0.3]} />
-          <meshStandardMaterial color="#1d4ed8" metalness={0.8} roughness={0.2} />
+          <meshStandardMaterial color="#2b2f2c" metalness={0.8} roughness={0.2} />
         </mesh>
         {/* Right Foot */}
         <mesh position={[0, -1.6, 0.1]}>
           <boxGeometry args={[0.4, 0.3, 0.5]} />
-          <meshStandardMaterial color="#60a5fa" metalness={0.7} roughness={0.3} />
+          <meshStandardMaterial color="#CDF564" metalness={0.7} roughness={0.3} />
         </mesh>
       </group>
     </group>
