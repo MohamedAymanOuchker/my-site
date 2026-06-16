@@ -1,8 +1,8 @@
 import { Reveal } from './Reveal';
 
 const STATS = [
-  { value: '9+', label: 'Projects shipped' },
-  { value: '6', label: 'Domains' },
+  { value: '10+', label: 'Projects shipped' },
+  { value: 'PhD', label: 'Researcher @ USMBA' },
   { value: '98%', label: 'Vision accuracy' },
   { value: '4DOF', label: 'Arm built' },
 ];
@@ -25,17 +25,18 @@ export function About() {
             </Reveal>
             <Reveal delay={0.06}>
               <p className="mt-8 font-display text-3xl font-semibold leading-[1.12] text-ink md:text-[2.7rem] text-balance">
-                I build robots that <span className="text-lime">see, think and move</span> —
-                bridging mechanical design, embedded systems and machine learning into systems
-                that work in the real world.
+                I build AI systems that make machines <span className="text-lime">move, decide
+                and adapt</span> — without human intervention.
               </p>
             </Reveal>
             <Reveal delay={0.12}>
               <p className="mt-8 max-w-xl text-base leading-relaxed text-muted">
-                My work spans autonomous agricultural robots, educational robotics platforms,
-                real-time computer-vision pipelines and model-based aerospace systems. I care
-                about the full stack of a machine — from the PCB and the path-planning algorithm
-                to the interface a person actually touches.
+                As a PhD researcher at USMBA and a Robotics &amp; AI engineer from Euromed
+                University of Fes, I specialize in autonomous navigation, embedded AI and
+                real-world control systems. My research focuses on adaptive planning for drones
+                in complex, dynamic environments — and I've shipped 10+ projects, from an
+                ESP32-based educational robot to a fuel-level calculation unit for aircraft
+                systems. My approach: if it can't run in production, it doesn't count.
               </p>
             </Reveal>
           </div>

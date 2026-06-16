@@ -44,7 +44,7 @@ export function Hero() {
         >
           <span className="h-px w-12 bg-lime" />
           <span className="font-mono text-[11px] uppercase tracking-mono text-lime">
-            Robotics × Artificial Intelligence
+            PhD Researcher · Robotics × AI
           </span>
         </motion.div>
 
@@ -69,8 +69,8 @@ export function Hero() {
           transition={{ duration: 0.7, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className="mt-8 max-w-xl text-lg leading-relaxed text-muted md:text-xl"
         >
-          I design intelligent robotic systems — from ROS navigation stacks and deep
-          reinforcement learning to embedded hardware that ships.
+          I build AI systems that make machines move, decide and adapt — from autonomous
+          UAV navigation and ROS stacks to embedded AI that ships.
         </motion.p>
 
         <motion.div
