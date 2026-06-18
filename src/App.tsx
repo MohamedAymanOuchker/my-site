@@ -20,6 +20,12 @@ function App() {
       technologies: ['ESP32', 'Flutter', 'Arduino', 'Bluetooth LE', 'Computer Vision', 'PlatformIO'],
     },
     {
+      title: 'RoboSense',
+      description: 'Open-source telemetry layer that ingests robot and IoT sensor readings as time-series data in TimescaleDB and streams them to a live monitoring dashboard. Built for real-time observability of autonomous and embedded systems.',
+      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800',
+      technologies: ['Python', 'TimescaleDB', 'PostgreSQL', 'Time-Series', 'Live Dashboard', 'IoT'],
+    },
+    {
       title: 'AgriBot',
       description: 'Autonomous agricultural robot utilizing computer vision and deep learning for precise crop monitoring and harvesting. Implemented control system with custom path planning algorithms.',
       image: 'https://www.raspberrypi.com/app/uploads/2024/01/Screenshot-2024-01-25-at-13.45.16.png',
