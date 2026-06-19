@@ -6,11 +6,18 @@ export interface Project {
   description: string;
   image: string;
   technologies: string[];
+  /** Public source repository, if one exists. */
+  repoUrl?: string;
+  /** Live demo / deployed URL, if one exists. */
+  liveUrl?: string;
+  /** Extra screenshots shown in the detail view. */
+  gallery?: string[];
 }
 
 interface ProjectCardProps extends Project {
   index: number;
   featured?: boolean;
+  onSelect?: () => void;
 }
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -22,6 +29,7 @@ export function ProjectCard({
   technologies,
   index,
   featured = false,
+  onSelect,
 }: ProjectCardProps) {
   return (
     <motion.article
@@ -29,7 +37,17 @@ export function ProjectCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-10% 0px' }}
       transition={{ duration: 0.7, ease: EASE }}
-      className={`group relative flex flex-col overflow-hidden border border-line bg-surface transition-colors duration-300 hover:border-lime/40 ${
+      onClick={onSelect}
+      role="button"
+      tabIndex={0}
+      aria-label={`View details for ${title}`}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onSelect?.();
+        }
+      }}
+      className={`group relative flex cursor-pointer flex-col overflow-hidden border border-line bg-surface transition-colors duration-300 hover:border-lime/40 focus-visible:border-lime/60 focus-visible:outline-none ${
         featured ? 'lg:col-span-2 lg:flex-row' : ''
       }`}
     >
