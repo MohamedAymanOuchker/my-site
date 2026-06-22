@@ -2,6 +2,89 @@ import type { BlogPost } from '../components/BlogCard';
 
 export const blogPosts: BlogPost[] = [
   {
+    id: 'deploying-ml-on-the-edge',
+    title: 'Deploying ML Models on the Edge',
+    excerpt: 'Cloud inference is easy until the network drops. Here is how we shrank a detection model to run in real time on a Jetson, and what the benchmarks never warned us about.',
+    date: 'JUN 22, 2026',
+    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200',
+    tags: ['Edge AI', 'TensorRT', 'Optimization'],
+    content: `
+The first time our robot lost its network connection mid-row, the perception stack went blind for four seconds. The model was running in the cloud, and four seconds is a long time for a machine moving through a field full of expensive crops. That failure is the entire argument for edge inference: when the model runs on the robot, latency is bounded and a dropped connection is an inconvenience instead of an emergency.
+
+The catch is that the hardware on the robot is nothing like the GPU you trained on. Getting a model to run there in real time is mostly a story about giving things up gracefully.
+
+## Why Move Inference Off the Cloud
+
+Round-tripping every camera frame to a server adds network latency you do not control, and it fails completely when connectivity does. Running inference locally collapses that round trip to a few milliseconds and keeps the robot autonomous when the link is gone.
+
+Modern edge accelerators make this realistic. An NVIDIA Jetson Orin Nano now delivers up to 67 INT8 TOPS inside a 7 to 25 watt power envelope ([NVIDIA](https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-orin/nano-super-developer-kit/), 2025). That is enough to run a real-time detector, but only after you stop treating the model like it is still on a datacenter card.
+
+> **The mental shift:** on the edge, your budget is not just accuracy. It is accuracy *per watt* and accuracy *per millisecond*. Every optimization is a trade against one of those.
+
+## Quantization Is Where the Speed Comes From
+
+The single biggest win is quantization, dropping the model's weights and activations from 32-bit floats to 8-bit integers. As of 2025, converting a model to INT8 with NVIDIA TensorRT typically delivers a 2 to 3 times latency reduction over FP32, and quantization-aware training can claw accuracy back to within a fraction of a percent of the original model ([NVIDIA Technical Blog](https://developer.nvidia.com/blog/achieving-fp32-accuracy-for-int8-inference-using-quantization-aware-training-with-tensorrt/), 2025).
+
+The reason it works is hardware: INT8 operations run on dedicated tensor cores that are faster and cheaper than their floating-point counterparts. The reason it is tricky is calibration. The compiler needs to see representative data to choose the right scaling factors, so you feed it a sample of real inputs, not random noise.
+
+\`\`\`python
+import torch
+import torch_tensorrt
+
+# Calibrate on a representative sample of REAL field images,
+# not random tensors. Bad calibration data means bad accuracy.
+calibrator = torch_tensorrt.ptq.DataLoaderCalibrator(
+    calib_loader,
+    cache_file="./calibration.cache",
+    algo_type=torch_tensorrt.ptq.CalibrationAlgo.ENTROPY_CALIBRATION_2,
+)
+
+trt_model = torch_tensorrt.compile(
+    model,
+    inputs=[torch_tensorrt.Input((1, 3, 640, 640))],
+    enabled_precisions={torch.int8},
+    calibrator=calibrator,
+)
+\`\`\`
+
+## Measure on the Device, Not the Datasheet
+
+Vendor TOPS numbers describe a peak the chip reaches under ideal conditions you will never see. The only latency that matters is the one you measure on the actual board, with the actual model, running the actual preprocessing. Always warm up first, because the first few inferences pay for lazy initialization that has nothing to do with steady-state speed.
+
+\`\`\`python
+import time
+import torch
+
+def benchmark(model, sample, runs=200):
+    for _ in range(20):          # Warm up the engine
+        model(sample)
+    torch.cuda.synchronize()
+
+    start = time.perf_counter()
+    for _ in range(runs):
+        model(sample)
+    torch.cuda.synchronize()
+    return (time.perf_counter() - start) / runs * 1000  # ms per frame
+\`\`\`
+
+Run that on your desktop GPU and on the Jetson, and the gap between them is your real optimization target.
+
+## What the Benchmarks Never Warned Us About
+
+The math of quantization is well documented. The failures in the field are not.
+
+1. **Thermal throttling.** A passively cooled board hits its TOPS rating for about ninety seconds, then the clocks drop as it heats up. Our "real-time" model was real-time only until the sun hit the enclosure. A heatsink fixed more latency than a week of model tuning.
+2. **The bottleneck was the CPU.** We spent days shaving milliseconds off the network while the real cost was image resizing and color conversion happening single-threaded on the CPU. Moving preprocessing onto the GPU mattered more than any change to the model itself.
+3. **Memory bandwidth, not compute.** Small models on the Orin Nano were often starved waiting for data, not maxed out on math. The accelerator sat idle because it could not be fed fast enough.
+
+> **Hard-won lesson:** profile the whole pipeline before you optimize the model. The slowest part is rarely the part you assumed.
+
+## Conclusion
+
+Edge deployment is a discipline of subtraction. You quantize, you prune, you move work off the critical path, and you measure everything on the hardware that will actually run in production. The reward is a robot that keeps thinking when the network does not, and for anything operating in the real world, that resilience is worth far more than the last point of accuracy you gave up to get it.
+    `,
+  },
+  {
     id: 'sensor-fusion-extended-kalman-filter',
     title: 'Sensor Fusion with an Extended Kalman Filter',
     excerpt: 'Why a single sensor never tells the truth, and how we fused wheel odometry with IMU data to keep our robot localized when GPS drops out.',
