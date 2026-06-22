@@ -1,7 +1,10 @@
-import { Suspense, useRef } from 'react';
+import { Suspense, useRef, lazy } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Scene } from './Scene';
 import { scrollToId } from '../lib/useLenis';
+
+// Code-split the 3D scene (Three.js + fiber + drei) into its own chunk so the
+// initial bundle stays small; it loads after first paint behind the Suspense fallback.
+const Scene = lazy(() => import('./Scene').then((m) => ({ default: m.Scene })));
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
