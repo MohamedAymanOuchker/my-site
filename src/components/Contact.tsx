@@ -57,7 +57,7 @@ export function Contact() {
           <div>
             <Reveal>
               <div className="flex items-center gap-4">
-                <span className="font-mono text-[11px] tracking-mono text-lime">04</span>
+                <span className="font-mono text-[11px] tracking-mono text-lime">05</span>
                 <span className="h-px w-10 bg-lime/50" />
                 <span className="font-mono text-[11px] uppercase tracking-mono text-muted">
                   Contact

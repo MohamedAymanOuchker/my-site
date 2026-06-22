@@ -7,6 +7,8 @@ import { Skills } from './components/Skills';
 import { Projects } from './components/Projects';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
+import { Blog } from './components/Blog';
+import { blogPosts } from './data/blogPosts';
 import type { Project } from './components/ProjectCard';
 
 function App() {
@@ -32,6 +34,7 @@ function App() {
       description: 'Drone Programming With Python. A comprehensive platform for controlling and programming drones autonomously using Python.',
       image: 'https://images.unsplash.com/photo-1524143986875-3b098d78b363?auto=format&fit=crop&w=800',
       technologies: ['Python', 'Drone', 'Autonomous Navigation'],
+      repoUrl: 'https://github.com/MohamedAymanOuchker/DronePy',
     },
     {
       title: 'AgriBot',
@@ -98,6 +101,7 @@ function App() {
         <About />
         <Skills />
         <Projects projects={projects} />
+        <Blog posts={blogPosts} />
         <Contact />
       </main>
       <Footer />
