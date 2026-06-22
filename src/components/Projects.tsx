@@ -2,9 +2,15 @@ import { useState } from 'react';
 import { ProjectCard, type Project } from './ProjectCard';
 import { ProjectModal } from './ProjectModal';
 import { SectionHeading } from './Reveal';
+import { ShowMoreButton } from './ShowMoreButton';
+
+const INITIAL_VISIBLE = 5;
 
 export function Projects({ projects }: { projects: Project[] }) {
   const [selected, setSelected] = useState<Project | null>(null);
+  const [expanded, setExpanded] = useState(false);
+
+  const visible = expanded ? projects : projects.slice(0, INITIAL_VISIBLE);
 
   return (
     <section id="work" className="relative border-b border-line bg-void py-28 md:py-36">
@@ -17,7 +23,7 @@ export function Projects({ projects }: { projects: Project[] }) {
         />
 
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-          {projects.map((project, index) => (
+          {visible.map((project, index) => (
             <ProjectCard
               key={project.title}
               {...project}
@@ -27,6 +33,15 @@ export function Projects({ projects }: { projects: Project[] }) {
             />
           ))}
         </div>
+
+        {projects.length > INITIAL_VISIBLE && (
+          <ShowMoreButton
+            expanded={expanded}
+            onToggle={() => setExpanded((v) => !v)}
+            collapsedLabel={`Show all ${projects.length} projects`}
+            expandedLabel="Show fewer projects"
+          />
+        )}
       </div>
 
       <ProjectModal project={selected} onClose={() => setSelected(null)} />
