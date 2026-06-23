@@ -2,6 +2,135 @@ import type { BlogPost } from '../components/BlogCard';
 
 export const blogPosts: BlogPost[] = [
   {
+    id: 'sim-to-real-transfer',
+    title: 'Crossing the Reality Gap: Sim-to-Real Transfer',
+    excerpt: 'Your policy is flawless in simulation, then faceplants on the real robot in three seconds. Here is why the reality gap exists and the techniques that make it small enough to cross.',
+    date: 'JUN 23, 2026',
+    image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200',
+    tags: ['Robotics', 'Reinforcement Learning', 'Simulation'],
+    content: `
+Your policy is flawless in simulation. It grasps every object, walks every gait, never falls. Then you load it onto the real robot and it faceplants in the first three seconds. Welcome to the reality gap, the single biggest reason reinforcement learning struggles to leave the lab.
+
+Sim-to-real transfer is the set of techniques for training in a simulator and having the result survive contact with the physical world. None of them make the gap disappear. The good ones just make it small enough to cross.
+
+## Why the Reality Gap Exists
+
+A simulator is a simplified model of physics, and the robot lives in the unsimplified version. Friction is never quite what the model says, motors have backlash and delay, sensors add noise, and mass shifts the moment you bolt on a new battery. The policy overfits to the simulator's quirks, learning a solution that only works in that specific made-up world.
+
+The deeper problem is that a learned policy will exploit anything. If the contact model is slightly wrong, the policy finds that error and leans on it, because it was rewarded for doing exactly that.
+
+> **The core trap:** a policy optimizes for the world it trained in. If that world is even slightly fictional, the policy learns the fiction.
+
+## Domain Randomization: Train on Chaos
+
+The most reliable fix is to stop training in one world and start training in thousands. Domain randomization scrambles the simulator's parameters every episode: friction, mass, motor strength, sensor noise, latency, lighting. The policy never sees the same physics twice, so it cannot overfit to any single version.
+
+The bet is simple. If the policy works across a wide enough range of randomized worlds, the real world is just one more sample inside that range. You are not modeling reality accurately. You are making the policy robust to not knowing it.
+
+\`\`\`python
+# Randomize physics every reset so the policy never overfits one world.
+def randomize(env):
+    env.friction     = uniform(0.6, 1.4)   # ground grip varies
+    env.motor_gain   = uniform(0.8, 1.2)   # actuator strength
+    env.payload_kg   = uniform(0.0, 2.0)   # unknown attachments
+    env.sensor_noise = uniform(0.0, 0.05)  # IMU / encoder jitter
+    env.action_delay = randint(0, 3)       # control latency, steps
+    return env
+\`\`\`
+
+Pick the ranges too narrow and the policy stays brittle. Too wide and it learns nothing, hedging so hard it ends up mediocre everywhere. Finding that band is most of the work.
+
+## What Actually Breaks on Hardware
+
+The gap rarely opens where the math says it should. The surprises are mechanical and mundane.
+
+1. **Latency.** The simulator applies actions instantly. The real control loop has delay between deciding and moving, and a policy trained without it oscillates the moment it meets a real motor.
+2. **The dynamics you didn't model.** Cable drag, a wheel that is slightly out of round, a gearbox that sticks when cold. None are in the sim, all are in the robot.
+3. **Sensor reality.** Sim sensors are clean. Real ones drop frames, saturate in sunlight, and disagree with each other, exactly the conditions a good sensor-fusion layer exists to smooth over.
+
+> **Hard-won lesson:** model the actuator and the latency before you touch the visuals. Cheap dynamics errors break more policies than imperfect rendering ever will.
+
+## Closing the Loop with Real Data
+
+Randomization gets you close; real data gets you the rest of the way. The strongest pipelines run a feedback loop: deploy the policy on hardware, record where it disagrees with the simulator, then tune the sim's parameters until the two match. Each pass shrinks the gap.
+
+This is where a little real-world rollout data is worth an enormous amount of simulation. You stop guessing the friction range and start measuring it, then center your randomization on the truth instead of a hopeful guess.
+
+## Conclusion
+
+Sim-to-real is less a trick than a discipline of humility. You assume your simulator is wrong, train a policy that does not care exactly how, and then use real measurements to close whatever gap is left. The teams that ship learned policies are not the ones with the prettiest simulators. They are the ones who respected the gap early, randomized hard, and let the robot tell them where the model lied.
+    `,
+  },
+  {
+    id: 'slam-from-scratch',
+    title: 'SLAM From Scratch: Mapping an Unknown World',
+    excerpt: 'Drop a robot into a room it has never seen and it has to draw the map and find itself on that map at the same time. Here is how SLAM pulls off the trick, and why the map still drifts.',
+    date: 'JUN 23, 2026',
+    image: 'https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?auto=format&fit=crop&w=1200',
+    tags: ['Robotics', 'SLAM', 'Localization'],
+    content: `
+Drop a robot into a building it has never seen and ask it to make a map. It cannot, because to place a wall on the map it needs to know where it is standing, and to know where it is standing it needs a map to compare against. That circular dependency is the whole problem. Simultaneous Localization and Mapping, or SLAM, is the family of algorithms that breaks the circle by solving both halves at once.
+
+I have watched a lot of beautifully rendered maps slowly bend themselves into nonsense, so this is as much about the failure modes as the theory.
+
+## The Chicken-and-Egg Problem
+
+SLAM is hard because localization and mapping each depend on the other. You cannot build an accurate map without knowing your pose, and you cannot estimate your pose accurately without a map. SLAM sidesteps the deadlock by treating both as a single estimation problem and refining them together as new sensor data arrives.
+
+The trick is to never commit too hard to either one. The robot keeps a running estimate of its trajectory and the map, and every new scan is a chance to nudge both toward consistency.
+
+> **The core bet:** small errors are tolerable as long as they stay correlated. SLAM does not need a perfect pose at every step. It needs the accumulated error to be correctable later.
+
+## Scan Matching Estimates How You Moved
+
+Between two moments, the robot needs to know how far it traveled. Wheel odometry gives a rough guess, but it drifts. Scan matching refines that guess by sliding the newest laser scan over the previous one and finding the rotation and translation that make them line up best.
+
+Algorithms like Iterative Closest Point do this by repeatedly pairing nearby points and minimizing the distance between them. The output is a corrected motion estimate that is far better than odometry alone, especially in corridors and rooms with distinct geometry.
+
+This is also where a good motion prior pays off. Fusing wheel odometry and an IMU first, the same way an Extended Kalman Filter does for localization, gives scan matching a much better starting guess and keeps it from locking onto the wrong alignment.
+
+## The Occupancy Grid Is the Map
+
+Most ground-robot SLAM represents the world as an occupancy grid: a 2D array of cells, each holding the probability that it is occupied. Rather than storing raw probabilities, you store log-odds, because then every sensor update is just an addition and the values never get stuck at exactly 0 or 1.
+
+\`\`\`python
+import numpy as np
+
+# Log-odds occupancy grid. Positive = likely occupied, negative = likely free.
+grid = np.zeros((height, width), dtype=np.float32)
+
+L_OCC, L_FREE = 0.85, -0.4   # per-hit evidence
+L_MIN, L_MAX = -5.0, 5.0     # clamp so a cell can always change its mind
+
+def update_cell(row, col, hit):
+    grid[row, col] += L_OCC if hit else L_FREE
+    grid[row, col] = np.clip(grid[row, col], L_MIN, L_MAX)
+\`\`\`
+
+Clamping matters more than it looks. Without it, a cell that has been seen as a wall ten thousand times becomes so certain that a moved chair can never erase it. The clamp keeps the map able to change its mind.
+
+## Loop Closure Fixes the Drift
+
+Here is the part that makes or breaks a map. As the robot drives, small scan-matching errors accumulate, and a long loop around a building comes back not quite meeting itself. Loop closure is the moment the robot recognizes a place it has visited before and snaps the whole trajectory back into alignment.
+
+Detecting that revisit is the hard half. Get it right and a drifted map folds cleanly shut. Get it wrong, matching two different rooms that happen to look alike, and the optimizer confidently tears the map in two.
+
+> **Hard-won lesson:** a single false loop closure does more damage than a thousand small odometry errors. Be conservative about declaring a revisit.
+
+## What Breaks in the Real World
+
+The textbook version assumes a tidy, static world. The building does not cooperate.
+
+1. **Long featureless hallways.** Scan matching needs geometry to bite into. In a straight corridor with no doorways, every scan looks the same and the robot slides blindly, accumulating error it cannot detect.
+2. **Moving people.** A person walking past gets baked into the map as a smear of phantom walls unless you actively reject dynamic points.
+3. **Symmetry.** Two identical rooms are a loop-closure trap. The detector sees a perfect match and closes a loop that should never have existed.
+
+## Conclusion
+
+SLAM is not magic, and it is not solved. It is a careful balancing act between trusting your motion estimate and trusting your sensors, held together by the occasional loop closure that pays down accumulated drift. Build it once from the grid up and you stop seeing the map as a picture and start seeing it as a hypothesis, one the robot is always quietly revising. That shift in mindset is what makes the failures predictable, and predictable failures are the ones you can engineer around.
+    `,
+  },
+  {
     id: 'deploying-ml-on-the-edge',
     title: 'Deploying ML Models on the Edge',
     excerpt: 'Cloud inference is easy until the network drops. Here is how we shrank a detection model to run in real time on a Jetson, and what the benchmarks never warned us about.',
